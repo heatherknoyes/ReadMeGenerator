@@ -27,12 +27,14 @@ function renderLicenseLink(license) {
 // DONE: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  if (license != null) {
-    return `[![License: ${license}](${renderLicenseBadge(
-      license
-    )})](${renderLicenseLink(license)})`;
-  }
-  return "";
+  let section = "";
+  license.forEach((item) => {
+    section += `
+[![License: ${item}](${renderLicenseBadge(item)})](${renderLicenseLink(item)})
+
+`;
+  });
+  return section;
 }
 
 // TODO: Create a function to generate markdown for README
