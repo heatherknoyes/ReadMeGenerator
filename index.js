@@ -1,50 +1,68 @@
-// TODO: Include packages needed for this application
+// DONE: Include packages needed for this application
 const inquire = require("inquirer");
 const fs = require("fs");
-const gm = require("./utils/generateMarkdown");
+const generateMarkdown = require("./utils/generateMarkdown");
 
-// TODO: Create an array of questions for user input
+// DONE: Create an array of questions for user input
 const questions = [
-  { type: "input", message: "What is your name? ", name: "name" },
+  { type: "input", message: "Project title: ", name: "title" },
   {
     type: "input",
-    message: "Where are you located? ",
-    name: "location",
+    message: "Description of project: ",
+    name: "description",
   },
   {
     type: "input",
-    message: "What is your favorite food? ",
-    name: "favfood",
+    message: "Installation instructions: ",
+    name: "installInstructions",
   },
   {
     type: "input",
-    message: "Provide your LinkedIn Profile Username: ",
-    name: "linkedin",
+    message: "Usage information: ",
+    name: "usageInfo",
   },
   {
     type: "input",
-    message: "Provide your GitHub Username: ",
+    message: "Contribution guidelines: ",
+    name: "contribution",
+  },
+  {
+    type: "input",
+    message: "Test instructions: ",
+    name: "testInstructions",
+  },
+  {
+    type: "checkbox",
+    message: "Pick a license: ",
+    name: "license",
+    choices: ["MIT", "Apache", "IBM"],
+  },
+  {
+    type: "input",
+    message: "GitHub Username: ",
     name: "github",
+  },
+  {
+    type: "input",
+    message: "Email address: ",
+    name: "email",
   },
 ];
 
-// TODO: Create a function to write README file
+// DONE: Create a function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, gm.generateMarkdown(data), (err) =>
+  fs.writeFile(fileName, generateMarkdown(data), (err) =>
     err ? console.log(err) : console.log("Success!")
   );
 }
 
-// TODO: Create a function to initialize app
+// DONE: Create a function to initialize app
 function init() {
   inquire
     .prompt(questions)
     .then((response) => {
-      const filename = `${response.name
-        .toLowerCase()
-        .split(" ")
-        .join(" ")}.html`;
-      writeToFile(filename, data);
+      const filename = "README.md";
+      writeToFile(filename, response);
     })
     .catch((error) => {
       console.log(error);
