@@ -75,12 +75,14 @@ ${data.contribution}
 
 ## Tests
 
-${testInstructions}
+${data.testInstructions}
 
 ## Questions
 
 If there are any questions on the work provided in this repository please use the following contact information: 
-GitHub: ${data.github}
+
+GitHub: [${data.github}](https://github.com/${data.github})
+
 Email: ${data.email}`;
 }
 
