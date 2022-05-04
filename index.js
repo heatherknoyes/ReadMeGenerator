@@ -2,37 +2,53 @@
 const inquire = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
+const confirmAnswerValidator = (answer) => {
+  if (answer !== "") {
+    return true;
+  }
+  return "Please enter at least one character.";
+};
 
 // DONE: Create an array of questions for user input
 const questions = [
-  { type: "input", message: "Project title: ", name: "title" },
+  {
+    type: "input",
+    message: "Project title: ",
+    name: "title",
+    validate: confirmAnswerValidator,
+  },
   {
     type: "input",
     message: "Description of project: ",
     name: "description",
+    validate: confirmAnswerValidator,
   },
   {
     type: "input",
     message: "Installation instructions: ",
     name: "installInstructions",
+    validate: confirmAnswerValidator,
   },
   {
     type: "input",
     message: "Usage information: ",
     name: "usageInfo",
+    validate: confirmAnswerValidator,
   },
   {
     type: "input",
     message: "Contribution guidelines: ",
     name: "contribution",
+    validate: confirmAnswerValidator,
   },
   {
     type: "input",
     message: "Test instructions: ",
     name: "testInstructions",
+    validate: confirmAnswerValidator,
   },
   {
-    type: "checkbox",
+    type: "list",
     message: "Pick a license: ",
     name: "license",
     choices: ["MIT", "Apache", "IBM"],
@@ -41,11 +57,13 @@ const questions = [
     type: "input",
     message: "GitHub Username: ",
     name: "github",
+    validate: confirmAnswerValidator,
   },
   {
     type: "input",
     message: "Email address: ",
     name: "email",
+    validate: confirmAnswerValidator,
   },
 ];
 

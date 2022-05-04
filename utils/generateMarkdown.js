@@ -27,28 +27,23 @@ function renderLicenseLink(license) {
 // DONE: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  let section = "";
-  license.forEach((item) => {
-    section += `
-[![License: ${item}](${renderLicenseBadge(item)})](${renderLicenseLink(item)})
-
-`;
-  });
-  return section;
+  if (license) {
+    return `[![License: ${license}](${renderLicenseBadge(
+      license
+    )})](${renderLicenseLink(license)}) `;
+  }
+  return "";
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title}
+  let readme = `# ${data.title}
 
-## Description
+  ${renderLicenseSection(data.license)}
+  
+  ## Description
 
 ${data.description}
-
-- What was your motivation?
-- Why did you build this project? 
-- What problem does it solve?
-- What did you learn?
 
 ## Table of Contents
 
@@ -61,15 +56,21 @@ ${data.description}
 
 ## Installation
 
-${data.installInstructions}
+Run the following command in order to be able to install the package for this code:
+
+    ${data.installInstructions}
 
 ## Usage
 
-${data.usageInfo}
+To run this code from the parent directory use the following command:
 
+    ${data.usageInfo}
+    
 ## License
-
-${renderLicenseSection(data.license)}
+    
+This project is covered under the following license: ${renderLicenseSection(
+    data.license
+  )}
 
 ## Contributing
 
@@ -77,15 +78,19 @@ ${data.contribution}
 
 ## Tests
 
-${data.testInstructions}
+Run the following command to initiate tests on the code:
 
+    ${data.testInstructions}
+    
 ## Questions
 
 If there are any questions on the work provided in this repository please use the following contact information: 
 
 GitHub: [${data.github}](https://github.com/${data.github})
-
+    
 Email: ${data.email}`;
+
+  return readme;
 }
 
 module.exports = generateMarkdown;
